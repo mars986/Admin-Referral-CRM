@@ -36,6 +36,10 @@
     {
       "binding": "REFERRAL_ASSETS",
       "bucket_name": "apex-wellness-referral-assets"
+    },
+    {
+      "binding": "CRM_FILES",
+      "bucket_name": "apex-wellness-referral-assets"
     }
   ],
   "services": [
