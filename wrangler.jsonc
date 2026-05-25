@@ -1,0 +1,47 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "apex-wellness-crm",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-05-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "vars": {
+    "APP_URL": "https://wellness.apexcompounding.com",
+    "APEX_WEBSITE_URL": "https://wellness.apexcompounding.com",
+    "APEX_PORTAL_URL": "https://wellness.apexcompounding.com",
+    "APEX_SUPPORT_EMAIL": "support@wellness.apexcompounding.com",
+    "APEX_ADMIN_EMAIL": "marcelloefficace@gmail.com",
+    "CRM_BRAND_NAME": "Apex Wellness",
+    "ACCESS_ENFORCED": "true",
+    "ADMIN_NOTIFICATION_EMAIL": "marcelloefficace@gmail.com",
+    "RESEND_FROM_EMAIL": "Apex Wellness <noreply@wellness.apexcompounding.com>",
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAC-stCAajk4h7aBv"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "apex-compounding-db",
+      "database_id": "0021e6df-93f2-46b9-90ec-24cb8c8d20da",
+      "migrations_dir": "./migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "REFERRAL_ASSETS",
+      "bucket_name": "apex-wellness-referral-assets"
+    }
+  ],
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "apex-wellness-crm"
+    }
+  ]
+}
