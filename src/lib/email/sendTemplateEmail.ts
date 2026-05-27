@@ -1,5 +1,4 @@
 import { Resend } from "resend";
-import { getRuntimeEnv, getServerConfig } from "@/lib/cloudflare/env";
 import {
   type ResendTemplateAlias,
   RESEND_TEMPLATES,
@@ -12,12 +11,10 @@ export type SendTemplateEmailInput = {
   subjectOverride?: string;
 };
 
-export async function getDefaultTemplateVariables() {
-  const config = await getServerConfig();
-
+export function getDefaultTemplateVariables() {
   return {
-    SUPPORT_EMAIL: config.supportEmail,
-    WEBSITE_URL: config.appUrl,
+    SUPPORT_EMAIL: process.env.APEX_SUPPORT_EMAIL ?? "",
+    WEBSITE_URL: process.env.APEX_WEBSITE_URL ?? "",
   };
 }
 
@@ -39,10 +36,8 @@ export async function sendTemplateEmail({
     throw new Error("sendTemplateEmail must only run on the server");
   }
 
-  const env = await getRuntimeEnv();
-  const config = await getServerConfig();
-  const apiKey = env?.RESEND_API_KEY ?? process.env.RESEND_API_KEY;
-  const from = env?.RESEND_FROM_EMAIL ?? process.env.RESEND_FROM_EMAIL ?? config.resendFromEmail;
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.RESEND_FROM_EMAIL;
 
   if (!apiKey) {
     throw new Error("Missing RESEND_API_KEY");
@@ -58,7 +53,7 @@ export async function sendTemplateEmail({
   }
 
   const mergedVariables = normalizeVariables({
-    ...(await getDefaultTemplateVariables()),
+    ...getDefaultTemplateVariables(),
     ...variables,
   });
 

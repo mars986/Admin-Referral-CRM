@@ -9,19 +9,8 @@
     "binding": "ASSETS"
   },
   "observability": {
-    "enabled": false,
-    "head_sampling_rate": 1,
-    "logs": {
-      "enabled": true,
-      "head_sampling_rate": 1,
-      "persist": true,
-      "invocation_logs": true
-    },
-    "traces": {
-      "enabled": false,
-      "persist": true,
-      "head_sampling_rate": 1
-    }
+    "enabled": true,
+    "head_sampling_rate": 1
   },
   "vars": {
     "APP_URL": "https://wellness.apexcompounding.com",
@@ -46,10 +35,6 @@
   "r2_buckets": [
     {
       "binding": "REFERRAL_ASSETS",
-      "bucket_name": "apex-wellness-referral-assets"
-    },
-    {
-      "binding": "CRM_FILES",
       "bucket_name": "apex-wellness-referral-assets"
     }
   ],
